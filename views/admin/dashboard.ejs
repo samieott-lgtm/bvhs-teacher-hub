@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Admin dashboard</h1>
+  <p class="lede">Update anything on the site below. Changes appear on the live site immediately.</p>
+</div>
+
+<h2 style="margin-top:6px;">Dashboard content</h2>
+<div class="admin-section-list" style="margin-bottom:28px;">
+  <% Object.keys(resources).forEach(function(key) { %>
+    <% const r = resources[key]; %>
+    <div class="admin-section-card">
+      <h3><%= r.label %></h3>
+      <p><%= r.description %></p>
+      <a class="btn btn-primary btn-sm" href="/admin/<%= key %>">Manage</a>
+    </div>
+  <% }) %>
+</div>
+
+<h2>Page content</h2>
+<div class="admin-section-list" style="margin-bottom:28px;">
+  <% Object.keys(pages).forEach(function(key) { %>
+    <% const p = pages[key]; %>
+    <div class="admin-section-card">
+      <h3><%= p.label %></h3>
+      <p>Edit the text shown on the <%= p.label %> page.</p>
+      <a class="btn btn-primary btn-sm" href="/admin/pages/<%= key %>">Edit page</a>
+    </div>
+  <% }) %>
+</div>
+
+<h2>Site settings</h2>
+<div class="admin-section-list">
+  <div class="admin-section-card">
+    <h3>Staff accounts</h3>
+    <p>Add teacher logins, reset passwords, or make someone an admin.</p>
+    <a class="btn btn-primary btn-sm" href="/admin/users">Manage accounts</a>
+  </div>
+  <div class="admin-section-card">
+    <h3>General settings</h3>
+    <p>School name and tagline shown in the header.</p>
+    <a class="btn btn-primary btn-sm" href="/admin/settings/general">Edit settings</a>
+  </div>
+</div>

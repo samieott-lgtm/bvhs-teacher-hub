@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Site settings</h1>
+</div>
+
+<a href="/admin">&larr; Back to dashboard</a>
+
+<form class="stack" method="POST" action="/admin/settings/general" style="margin-top:18px; max-width:480px;">
+  <div class="field">
+    <label for="schoolName">School name</label>
+    <input type="text" id="schoolName" name="schoolName" value="<%= settings.schoolName || '' %>" required />
+  </div>
+  <div class="field">
+    <label for="mascot">Mascot</label>
+    <input type="text" id="mascot" name="mascot" value="<%= settings.mascot || '' %>" />
+  </div>
+  <div class="field">
+    <label for="tagline">Header tagline</label>
+    <input type="text" id="tagline" name="tagline" value="<%= settings.tagline || '' %>" />
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+
+<h2 style="margin-top:36px;">Admin username & password</h2>
+<p class="lede">For security, the admin username and password are set as environment variables (<code>ADMIN_USERNAME</code> and <code>ADMIN_PASSWORD</code>) rather than stored here. See the setup guide for how to change them on Railway.</p>

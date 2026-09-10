@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1><%= isNew ? 'Add staff account' : 'Edit staff account' %></h1>
+</div>
+
+<a href="/admin/users">&larr; Back to list</a>
+
+<% if (error) { %>
+  <div class="login-error" style="margin-top:16px;"><%= error %></div>
+<% } %>
+
+<form class="stack" method="POST" action="<%= isNew ? '/admin/users/new' : '/admin/users/' + user.id + '/edit' %>" style="margin-top:18px; max-width:480px;">
+  <% if (isNew) { %>
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value="<%= user.username || '' %>" required autofocus />
+      <div class="hint">What they'll type in to log in. No spaces - e.g. jsmith.</div>
+    </div>
+  <% } else { %>
+    <div class="field">
+      <label>Username</label>
+      <div><%= user.username %></div>
+    </div>
+  <% } %>
+
+  <div class="field">
+    <label for="name">Full name</label>
+    <input type="text" id="name" name="name" value="<%= user.name || '' %>" />
+  </div>
+
+  <div class="field">
+    <label for="role">Role</label>
+    <select id="role" name="role" style="width:100%; padding:10px 12px; border:1px solid var(--gray-border); border-radius:5px;">
+      <option value="staff" <%= user.role === 'staff' || !user.role ? 'selected' : '' %>>Staff (teacher)</option>
+      <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin (principal - can manage all content)</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="password"><%= isNew ? 'Temporary password' : 'Reset password (optional)' %></label>
+    <input type="text" id="password" name="password" <%= isNew ? 'required' : '' %> />
+    <div class="hint"><%= isNew ? 'They can log in with this right away. There is no forgot-password email yet, so write it down for them.' : 'Leave this blank to keep their current password.' %></div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline" href="/admin/users">Cancel</a>
+  </div>
+</form>

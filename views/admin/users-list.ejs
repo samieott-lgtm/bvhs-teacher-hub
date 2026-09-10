@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>Staff accounts</h1>
+  <p class="lede">Anyone with an account can log in and check off shared to-do items. Admin accounts can also manage all site content.</p>
+</div>
+
+<div class="admin-toolbar">
+  <a href="/admin">&larr; Back to dashboard</a>
+  <a class="btn btn-primary" href="/admin/users/new">Add staff account</a>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Name</th><th>Username</th><th>Role</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% users.forEach(function(u) { %>
+      <tr>
+        <td><%= u.name || '—' %></td>
+        <td><%= u.username %></td>
+        <td><span class="badge"><%= u.role %></span></td>
+        <td style="white-space:nowrap;">
+          <a class="btn btn-outline btn-sm" href="/admin/users/<%= u.id %>/edit">Edit</a>
+          <form class="inline-form" method="POST" action="/admin/users/<%= u.id %>/delete" onsubmit="return confirm('Remove this account? They will no longer be able to log in.');">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

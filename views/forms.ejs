@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>Forms & Documents</h1>
+  <p class="lede">Grouped by category. Click any item to open it.</p>
+</div>
+
+<% const categories = Object.keys(grouped); %>
+<% if (categories.length === 0) { %>
+  <p class="empty-note">No forms have been added yet.</p>
+<% } else { %>
+  <% categories.forEach(function(cat) { %>
+    <div class="forms-category">
+      <h3><%= cat %></h3>
+      <ul class="doc-list">
+        <% grouped[cat].forEach(function(doc) { %>
+          <li>
+            <span><%= doc.title %></span>
+            <a class="btn btn-outline btn-sm" href="<%= doc.url %>" target="_blank" rel="noopener">Open</a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  <% }) %>
+<% } %>

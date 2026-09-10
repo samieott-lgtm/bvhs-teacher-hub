@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Progress reports due",
+    "dueDate": "2026-09-18",
+    "description": "Enter progress grades in Skyward by 4:00 PM."
+  },
+  {
+    "id": 2,
+    "title": "PD hour logs due",
+    "dueDate": "2026-09-30",
+    "description": "Submit September professional development hours to the office."
+  }
+]

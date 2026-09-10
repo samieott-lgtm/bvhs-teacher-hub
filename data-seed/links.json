@@ -1,0 +1,7 @@
+[
+  { "id": 1, "label": "Skyward / Gradebook", "url": "https://www.skyward.com" },
+  { "id": 2, "label": "District Website", "url": "https://www.garfieldk12.org" },
+  { "id": 3, "label": "Canvas / LMS", "url": "https://canvas.instructure.com" },
+  { "id": 4, "label": "Substitute Request System", "url": "https://www.eeas.com" },
+  { "id": 5, "label": "Print / Copier Help", "url": "#" }
+]

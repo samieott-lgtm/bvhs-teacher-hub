@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>Professional Development</h1>
+  <p class="lede">Training, conferences, and PD hour opportunities.</p>
+</div>
+
+<% if (pd.length === 0) { %>
+  <p class="empty-note">No professional development opportunities have been posted yet.</p>
+<% } else { %>
+  <% pd.forEach(function(item) { %>
+    <section class="card accent-bright" style="margin-bottom:14px;">
+      <h2><%= item.title %></h2>
+      <% if (item.date) { %><div class="meta-date"><%= item.date %></div><% } %>
+      <% if (item.description) { %><p class="prose" style="margin-top:8px;"><%= item.description %></p><% } %>
+      <% if (item.link && item.link !== '#') { %>
+        <a class="btn btn-primary btn-sm" href="<%= item.link %>" target="_blank" rel="noopener">Sign up</a>
+      <% } %>
+    </section>
+  <% }) %>
+<% } %>

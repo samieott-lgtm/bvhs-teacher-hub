@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h1>Calendar</h1>
+  <p class="lede">All upcoming and past events on file.</p>
+</div>
+
+<% if (events.length === 0) { %>
+  <p class="empty-note">No events have been added yet.</p>
+<% } else { %>
+  <table class="event-table">
+    <thead>
+      <tr><th>Date</th><th>Event</th><th>Time</th><th>Location</th></tr>
+    </thead>
+    <tbody>
+      <% events.forEach(function(e) { %>
+        <tr>
+          <td><%= e.date %></td>
+          <td>
+            <strong><%= e.title %></strong>
+            <% if (e.description) { %><div class="meta-date"><%= e.description %></div><% } %>
+          </td>
+          <td><%= e.time || '—' %></td>
+          <td><%= e.location || '—' %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>

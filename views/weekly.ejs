@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>Weekly Updates</h1>
+  <p class="lede">A running archive of "This Week at BVHS" posts.</p>
+</div>
+
+<% if (weekly.length === 0) { %>
+  <p class="empty-note">No weekly updates have been posted yet.</p>
+<% } else { %>
+  <% weekly.forEach(function(w) { %>
+    <section class="card accent-green" style="margin-bottom:16px;">
+      <div class="meta-date">Week of <%= w.weekOf %></div>
+      <h2><%= w.title %></h2>
+      <p class="prose"><%= w.body %></p>
+    </section>
+  <% }) %>
+<% } %>

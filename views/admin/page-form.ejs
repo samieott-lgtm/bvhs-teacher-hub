@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1>Edit - <%= pageConfig.label %></h1>
+  <p class="lede">This text appears on the <%= pageConfig.label %> page (<%= pageConfig.path %>).</p>
+</div>
+
+<a href="/admin">&larr; Back to dashboard</a>
+
+<form class="stack" method="POST" action="/admin/pages/<%= pageKey %>" style="margin-top:18px; max-width:640px;">
+  <div class="field">
+    <label for="title">Page title</label>
+    <input type="text" id="title" name="title" value="<%= page.title || '' %>" required />
+  </div>
+  <div class="field">
+    <label for="body">Page content</label>
+    <textarea id="body" name="body" style="min-height:260px;"><%= page.body || '' %></textarea>
+    <div class="hint">Tip: leave a blank line between paragraphs. Line breaks are kept as-is on the page.</div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline" href="<%= pageConfig.path %>" target="_blank">Preview page</a>
+  </div>
+</form>

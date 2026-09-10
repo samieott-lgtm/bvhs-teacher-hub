@@ -1,0 +1,25 @@
+<div class="login-wrap">
+  <h1>Staff login</h1>
+  <p class="lede" style="margin-bottom:20px;">Log in with your BVHS staff account.</p>
+
+  <% if (error) { %>
+    <div class="login-error"><%= error %></div>
+  <% } %>
+
+  <form class="stack" method="POST" action="/login">
+    <input type="hidden" name="next" value="<%= next %>" />
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required autofocus />
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Log in</button>
+    </div>
+  </form>
+
+  <p class="hint" style="margin-top:16px;">Don't have an account yet? Ask your principal to add one from the admin area.</p>
+</div>

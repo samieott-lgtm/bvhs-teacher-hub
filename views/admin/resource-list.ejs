@@ -1,0 +1,47 @@
+<div class="page-header">
+  <h1><%= config.label %></h1>
+  <p class="lede"><%= config.description %></p>
+</div>
+
+<div class="admin-toolbar">
+  <a href="/admin">&larr; Back to dashboard</a>
+  <a class="btn btn-primary" href="/admin/<%= resourceKey %>/new">Add new</a>
+</div>
+
+<% if (items.length === 0) { %>
+  <p class="empty-note">Nothing here yet. Click "Add new" to create the first one.</p>
+<% } else { %>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <% config.fields.forEach(function(f) { %>
+          <% if (f.type !== 'textarea') { %><th><%= f.label %></th><% } %>
+        <% }) %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach(function(item) { %>
+        <tr>
+          <% config.fields.forEach(function(f) { %>
+            <% if (f.type !== 'textarea') { %>
+              <td>
+                <% if (f.type === 'checkbox') { %>
+                  <%= item[f.name] ? 'Yes' : 'No' %>
+                <% } else { %>
+                  <%= item[f.name] %>
+                <% } %>
+              </td>
+            <% } %>
+          <% }) %>
+          <td style="white-space:nowrap;">
+            <a class="btn btn-outline btn-sm" href="/admin/<%= resourceKey %>/<%= item.id %>/edit">Edit</a>
+            <form class="inline-form" method="POST" action="/admin/<%= resourceKey %>/<%= item.id %>/delete" onsubmit="return confirm('Delete this item? This cannot be undone.');">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>

@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1><%= isNew ? 'Add new' : 'Edit' %> - <%= config.label %></h1>
+</div>
+
+<a href="/admin/<%= resourceKey %>">&larr; Back to list</a>
+
+<form class="stack" method="POST" action="<%= isNew ? '/admin/' + resourceKey + '/new' : '/admin/' + resourceKey + '/' + item.id + '/edit' %>" enctype="<%= resourceKey === 'documents' ? 'multipart/form-data' : 'application/x-www-form-urlencoded' %>" style="margin-top:18px; max-width:560px;">
+  <% config.fields.forEach(function(f) { %>
+    <div class="field">
+      <% if (f.type === 'checkbox') { %>
+        <div class="checkbox-row">
+          <input type="checkbox" id="<%= f.name %>" name="<%= f.name %>" <%= item[f.name] ? 'checked' : '' %> />
+          <label for="<%= f.name %>"><%= f.label %></label>
+        </div>
+      <% } else if (f.type === 'textarea') { %>
+        <label for="<%= f.name %>"><%= f.label %></label>
+        <textarea id="<%= f.name %>" name="<%= f.name %>" <%= f.required ? 'required' : '' %>><%= item[f.name] || '' %></textarea>
+      <% } else { %>
+        <label for="<%= f.name %>"><%= f.label %></label>
+        <input type="<%= f.type %>" id="<%= f.name %>" name="<%= f.name %>" value="<%= item[f.name] || '' %>" <%= f.required ? 'required' : '' %> />
+        <% if (resourceKey === 'documents' && f.name === 'url') { %>
+          <div class="hint">Paste a link, or leave this and upload a file below instead.</div>
+        <% } %>
+      <% } %>
+    </div>
+  <% }) %>
+
+  <% if (resourceKey === 'documents') { %>
+    <div class="field">
+      <label for="file">Or upload a file (PDF, Word doc, etc.)</label>
+      <input type="file" id="file" name="file" />
+      <div class="hint">If you upload a file, it replaces the link above automatically.</div>
+    </div>
+  <% } %>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline" href="/admin/<%= resourceKey %>">Cancel</a>
+  </div>
+</form>

@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>Staff Directory</h1>
+  <p class="lede">Contact information for all BVHS staff.</p>
+</div>
+
+<% if (staff.length === 0) { %>
+  <p class="empty-note">No staff members have been added yet.</p>
+<% } else { %>
+  <div class="staff-grid">
+    <% staff.forEach(function(s) { %>
+      <div class="staff-card">
+        <h3><%= s.name %></h3>
+        <div class="staff-role"><%= s.role %></div>
+        <div class="staff-meta">
+          <% if (s.department) { %><div><%= s.department %></div><% } %>
+          <% if (s.room) { %><div>Room <%= s.room %></div><% } %>
+          <% if (s.email) { %><div><a href="mailto:<%= s.email %>"><%= s.email %></a></div><% } %>
+          <% if (s.phone) { %><div><%= s.phone %></div><% } %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>

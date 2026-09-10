@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Jane Doe",
+    "role": "Principal",
+    "department": "Administration",
+    "email": "jane.doe@bvhs.edu",
+    "room": "Main Office",
+    "phone": "435-555-0100"
+  },
+  {
+    "id": 2,
+    "name": "Sample Teacher",
+    "role": "Math Teacher",
+    "department": "Math",
+    "email": "sample.teacher@bvhs.edu",
+    "room": "204",
+    "phone": "435-555-0101"
+  }
+]

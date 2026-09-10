@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> · Admin · <%= (typeof settings !== 'undefined' && settings.schoolName) || 'BVHS' %> Teacher Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="admin-body">
+  <header class="topbar admin-topbar">
+    <a href="/admin" class="topbar-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">
+        <strong>Admin</strong>
+        <small>Teacher Hub content manager</small>
+      </span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <a href="/" class="topbar-admin-link">View site</a>
+    <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+      <form action="/logout" method="POST" class="inline-form">
+        <button type="submit" class="topbar-logout">Log out</button>
+      </form>
+    <% } %>
+  </header>
+
+  <main class="admin-content">
+    <%- body %>
+  </main>
+</body>
+</html>

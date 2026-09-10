@@ -1,0 +1,109 @@
+<div class="page-header">
+  <h1>Welcome back, Mustangs</h1>
+  <p class="lede">Everything you need for the week, in one place.</p>
+</div>
+
+<div class="dashboard-grid">
+
+  <section class="card accent-green span-2">
+    <h2>Principal announcements</h2>
+    <% if (announcements.length === 0) { %>
+      <p class="empty-note">No announcements yet.</p>
+    <% } else { %>
+      <ul class="plain">
+        <% announcements.slice(0, 4).forEach(function(a) { %>
+          <li>
+            <strong><%= a.title %></strong>
+            <% if (a.pinned) { %><span class="pinned-badge">Pinned</span><% } %>
+            <div class="meta-date"><%= a.date %></div>
+            <p style="margin-top:6px;"><%= a.body %></p>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="card accent-black">
+    <h2>This week at BVHS</h2>
+    <% if (!weekly) { %>
+      <p class="empty-note">No weekly update posted yet.</p>
+    <% } else { %>
+      <div class="meta-date">Week of <%= weekly.weekOf %></div>
+      <h3 style="margin-top:8px;"><%= weekly.title %></h3>
+      <p class="prose"><%= weekly.body %></p>
+      <a href="/weekly-updates" class="card-link">See past updates &rsaquo;</a>
+    <% } %>
+  </section>
+
+  <section class="card accent-bright">
+    <h2>Upcoming events <a href="/calendar" class="card-link">Full calendar</a></h2>
+    <% if (events.length === 0) { %>
+      <p class="empty-note">Nothing on the calendar right now.</p>
+    <% } else { %>
+      <ul class="plain">
+        <% events.forEach(function(e) { %>
+          <li>
+            <strong><%= e.title %></strong>
+            <div class="meta-date"><%= e.date %><%= e.time ? ' · ' + e.time : '' %><%= e.location ? ' · ' + e.location : '' %></div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="card accent-green">
+    <h2>Quick links</h2>
+    <% if (links.length === 0) { %>
+      <p class="empty-note">No links added yet.</p>
+    <% } else { %>
+      <div class="quicklinks-grid">
+        <% links.forEach(function(l) { %>
+          <a class="quicklink-btn" href="<%= l.url %>" target="_blank" rel="noopener"><%= l.label %></a>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+
+  <section class="card accent-black">
+    <h2>Important deadlines</h2>
+    <% if (deadlines.length === 0) { %>
+      <p class="empty-note">No upcoming deadlines.</p>
+    <% } else { %>
+      <ul class="plain">
+        <% deadlines.forEach(function(d) { %>
+          <li>
+            <strong><%= d.title %></strong>
+            <div class="meta-date">Due <%= d.dueDate %></div>
+            <% if (d.description) { %><p style="margin-top:4px;"><%= d.description %></p><% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="card accent-bright span-3">
+    <h2>Teacher to-do list</h2>
+    <% if (todos.length === 0) { %>
+      <p class="empty-note">Nothing on the shared list right now.</p>
+    <% } else { %>
+      <ul class="plain">
+        <% todos.forEach(function(t) { %>
+          <li class="todo-item <%= t.done ? 'done' : '' %>">
+            <% if (currentUser) { %>
+              <form method="POST" action="/todos/<%= t.id %>/toggle" style="display:inline;">
+                <button type="submit" class="todo-dot" style="cursor:pointer; padding:0; background-clip:content-box;" aria-label="Toggle done"></button>
+              </form>
+            <% } else { %>
+              <span class="todo-dot"></span>
+            <% } %>
+            <span class="task-text"><%= t.text %></span>
+          </li>
+        <% }) %>
+      </ul>
+      <% if (!currentUser) { %>
+        <p class="hint" style="color:var(--gray-text); font-size:0.85rem; margin-top:8px;"><a href="/login">Log in</a> to check items off.</p>
+      <% } %>
+    <% } %>
+  </section>
+
+</div>

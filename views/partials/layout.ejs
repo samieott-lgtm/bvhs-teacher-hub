@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> · <%= settings.schoolName || 'BVHS' %> Teacher Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
+
+  <header class="topbar">
+    <label for="nav-toggle" class="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </label>
+    <a href="/" class="topbar-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">
+        <strong><%= settings.schoolName || 'Bryce Valley High School' %></strong>
+        <small><%= settings.tagline || 'Teacher Hub' %></small>
+      </span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <% if (currentUser) { %>
+      <% if (isAdmin) { %>
+        <a href="/admin" class="topbar-admin-link">Admin</a>
+      <% } %>
+      <span class="topbar-admin-link" style="background:none; border:none;">Hi, <%= currentUser.name || currentUser.username %></span>
+      <form action="/logout" method="POST" class="inline-form">
+        <button type="submit" class="topbar-logout">Log out</button>
+      </form>
+    <% } else { %>
+      <a href="/login" class="topbar-admin-link">Staff login</a>
+    <% } %>
+  </header>
+
+  <div class="app-shell">
+    <label for="nav-toggle" class="nav-scrim"></label>
+    <nav class="sidenav">
+      <ul>
+        <% const navItems = [
+          { href: '/', label: 'Home' },
+          { href: '/weekly-updates', label: 'Weekly Updates' },
+          { href: '/calendar', label: 'Calendar' },
+          { href: '/mustang-time', label: 'Mustang Time' },
+          { href: '/hrs', label: 'HRS' },
+          { href: '/student-support', label: 'Student Support' },
+          { href: '/attendance-discipline', label: 'Attendance & Discipline' },
+          { href: '/procedures', label: 'School Procedures' },
+          { href: '/forms', label: 'Forms & Documents' },
+          { href: '/professional-development', label: 'Professional Development' },
+          { href: '/staff-directory', label: 'Staff Directory' },
+        ]; %>
+        <% navItems.forEach(function(item) { %>
+          <li>
+            <a href="<%= item.href %>" class="<%= currentPath === item.href ? 'active' : '' %>">
+              <%= item.label %>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </nav>
+
+    <main class="content">
+      <%- body %>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <span><%= settings.schoolName || 'Bryce Valley High School' %> · Staff resource site</span>
+  </footer>
+</body>
+</html>
